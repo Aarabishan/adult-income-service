@@ -1,0 +1,82 @@
+# -----------------------
+# Python basics
+# -----------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtualenvs
+.env
+.venv
+venv/
+ENV/
+
+# Editors & OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.ipynb~*
+
+# Logs & caches
+*.log
+logs/
+.cache/
+.pytest_cache/
+
+# -----------------------
+# ML artifacts (large/binary)
+# -----------------------
+# Generic model files
+*.joblib
+*.pkl
+*.pickle
+*.sav
+*.bin
+*.model
+*.cbm        # CatBoost
+*.h5
+*.hdf5
+*.pt
+*.onnx
+*.npy
+*.npz
+
+# MLflow local runs (if you ever generate here)
+mlruns/
+
+# TensorBoard / training runs
+runs/
+tensorboard/
+
+# -----------------------
+# Data (optional – uncomment if you don't want data in repo)
+# -----------------------
+# data/
+# *.csv
+# *.parquet
+# *.feather
+
+# -----------------------
+# Service-specific rules
+# -----------------------
+# Ensure model binaries in service/ are not committed
+service/*.joblib
+service/*.pkl
+service/*.cbm
+service/*.h5
+
+# Keep these tracked
+!service/app.py
+!service/Dockerfile
+!service/requirements.txt
+!service/thresholds.json

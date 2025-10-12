@@ -1,0 +1,6 @@
+{
+  "LogReg": 0.6,
+  "RandomForest": 0.6,
+  "CatBoost": 0.39999999999999997,
+  "MLP": 0.35
+}
