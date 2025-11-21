@@ -1,9 +1,9 @@
-# Adult Income Classification
+# Adult Income Classification - ML Coursework
 
 End-to-end pipeline for predicting whether a person’s income is >50K using the UCI Adult Census dataset.
 Includes preprocessing, model training & comparison, explainability (Permutation Importance + SHAP), and a production-style FastAPI service containerized with Docker.
 
-## Project Objectives
+## 📌 Project Objectives
 
 - Build a reproducible ML pipeline for binary classification (<=50K vs >50K).
 
@@ -15,7 +15,15 @@ Includes preprocessing, model training & comparison, explainability (Permutation
 
 - Package a FastAPI inference service and run it via Docker.
 
-## Data & Features
+## 🧰 Environment & Reproducibility
+
+- Python: 3.11 (service image: python:3.11-slim)
+
+- Key libs: scikit-learn, catboost, pandas, numpy, fastapi, uvicorn
+
+- MLflow for experiment tracking (mlruns file not added due to large file size)
+
+## 🧮 Data & Features
 
 - Dataset: UCI Adult (Census Income)
 
@@ -31,7 +39,7 @@ Includes preprocessing, model training & comparison, explainability (Permutation
 
 - Split: 70% train / 15% val / 15% test (stratified)
   
-## Modeling
+## 🔧 Modeling
 
 Trained with a shared ColumnTransformer:
 
@@ -41,7 +49,7 @@ Trained with a shared ColumnTransformer:
 
 - Categorical → impute (most_frequent) + OneHotEncoder(handle_unknown="ignore")
 
-## Models compared:
+## 🆚 Models compared:
 
 - Logistic Regression
 
@@ -53,7 +61,7 @@ Trained with a shared ColumnTransformer:
 
 Threshold tuning on validation set (optimize F1 for >50K), then final evaluation on test.
 
-## Results
+## 📊 Results
 
 Model comparison
 
@@ -76,7 +84,7 @@ Chosen best model: CatBoost
 
 - ROC-AUC: 0.932, PR-AUC: 0.834
 
-## Interpretability
+## 🔍 Interpretability
 
 - Permutation Importance (aggregated to original features):
 Top drivers included education-num, hours-per-week, age, capital-gain / loss, and marital status simplification.
@@ -84,7 +92,7 @@ Top drivers included education-num, hours-per-week, age, capital-gain / loss, an
 - SHAP (CatBoost):
 Confirmed education-num, hours-per-week, and age as strong contributors; positive capital-gain pushes probability upward.
 
-## Practical insights
+## 💡 Practical insights
 
 - Policies that encourage skills/education and professional roles align with higher earning potential.
 
@@ -92,14 +100,14 @@ Confirmed education-num, hours-per-week, and age as strong contributors; positiv
 
 - High capital-gain events are strong signals; risk-based rules might flag such records for manual review in a decision workflow.
 
-## Error Analysis (CatBoost)
+## 🧪 Error Analysis (CatBoost)
 
 - False Positives: often managerial/professional roles with moderate losses or gov/private work; predicted >50K but actual <=50K.
 
 - False Negatives: younger workers, service/moving roles, or low capital-gain, predicted <=50K though actual >50K.
 Action: targeted thresholding or cost-sensitive adjustment depending on downstream use (e.g., minimize FN if missing high-income customers is costly).
 
-## Running the API (Docker)
+## 🚀 Running the API (Docker)
 
 Packaging & Project Layout:
 
@@ -114,4 +122,8 @@ Packaging & Project Layout:
     - requirements.txt —Python libraries for reproducible builds. 
     - Dockerfile — container recipe to build a self-contained image.
 
+🔴 Note: The trained model file model.joblib is not included in this repository due to its large file size.
+
 - Versioning: Git tags for releases (e.g., v1.0.0)
+
+## 🎓 Acadamice context: This repository documents one of the projects completed for my Machine Learning module in the MSc in Data Science program, 2025, Octorber. All results, code, and design choices are provided for educational purposes; performance may vary across environments and dataset revisions.
