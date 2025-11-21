@@ -126,4 +126,4 @@ Packaging & Project Layout:
 
 - Versioning: Git tags for releases (e.g., v1.0.0)
 
-🎓 Acadamice context: This repository documents one of the projects completed for my Machine Learning module in the MSc in Data Science program, 2025, Octorber. All results, code, and design choices are provided for educational purposes; performance may vary across environments and dataset revisions.
+🎓 Acadamice context: This repository documents one of the applied projects completed for the Machine Learning module in my MSc in Data Science programme (Octorber 2025). All results, code, and design choices are provided for educational purposes; actual performance may vary across environments and dataset revisions.
