@@ -122,8 +122,8 @@ Packaging & Project Layout:
     - requirements.txt —Python libraries for reproducible builds. 
     - Dockerfile — container recipe to build a self-contained image.
 
-🔴 Note: The trained model file model.joblib is not included in this repository due to its large file size.
+ 🔴 Note: The trained model file model.joblib is not included in this repository due to its large file size.
 
 - Versioning: Git tags for releases (e.g., v1.0.0)
 
-## 🎓 Acadamice context: This repository documents one of the projects completed for my Machine Learning module in the MSc in Data Science program, 2025, Octorber. All results, code, and design choices are provided for educational purposes; performance may vary across environments and dataset revisions.
+🎓 Acadamice context: This repository documents one of the projects completed for my Machine Learning module in the MSc in Data Science program, 2025, Octorber. All results, code, and design choices are provided for educational purposes; performance may vary across environments and dataset revisions.
