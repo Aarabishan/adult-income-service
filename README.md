@@ -103,8 +103,9 @@ Action: targeted thresholding or cost-sensitive adjustment depending on downstre
 
 Packaging & Project Layout:
 
-• Created a lightweight inference service with FastAPI and Uvicorn. 
-• Service code under service/: 
+- Created a lightweight inference service with FastAPI and Uvicorn.
+- Service code under service/: 
+    
     - app.py — API server, computes the same feature engineering used in training for 
       example, net_capital, has_capital, marital_simple, age_group, and aligns columns 
       to the pipeline, loads model and tuned thresholds, and serves predictions. 
@@ -113,4 +114,4 @@ Packaging & Project Layout:
     - requirements.txt —Python libraries for reproducible builds. 
     - Dockerfile — container recipe to build a self-contained image.
 
-• Versioning: Git tags for releases (e.g., v1.0.0)
+- Versioning: Git tags for releases (e.g., v1.0.0)
