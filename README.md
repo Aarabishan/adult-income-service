@@ -3,19 +3,15 @@
 End-to-end pipeline for predicting whether a person’s income is >50K using the UCI Adult Census dataset.
 Includes preprocessing, model training & comparison, explainability (Permutation Importance + SHAP), and a production-style FastAPI service containerized with Docker.
 
-## 📌 Project Objectives
+## 📌1. Project Objectives
 
 - Build a reproducible ML pipeline for binary classification (<=50K vs >50K).
-
 - Compare four model families: Logistic Regression, Random Forest, CatBoost, MLP.
-
 - Apply threshold tuning on a validation set and evaluate on a held-out test set.
-
 - Provide interpretability (Permutation Importance, SHAP) and error analysis.
-
 - Package a FastAPI inference service and run it via Docker.
 
-## 🧰 Environment & Reproducibility
+## 🧰2. Environment & Reproducibility
 
 - Python: 3.11 (service image: python:3.11-slim)
 
@@ -23,45 +19,36 @@ Includes preprocessing, model training & comparison, explainability (Permutation
 
 - MLflow for experiment tracking (mlruns file not added due to large file size)
 
-## 🧮 Data & Features
+## 🧮3. Data & Features
 
 - Dataset: UCI Adult (Census Income)
-
 - After cleaning/feature engineering, we used:
-
 - Numerical (continuous): age, education-num, capital-gain, capital-loss, hours-per-week
-
 - Binary numeric: net_Capital, has_capital, marital_simple, is_us
-
 - Categorical (OHE): workclass, occupation, relationship, race, gender, age_group, work_hours_category, education_level
-
 - Target: income → <=50K (0), >50K (1)
-
 - Split: 70% train / 15% val / 15% test (stratified)
+
   
-## 🔧 Modeling
+## 🔧4. Modeling
 
 Trained with a shared ColumnTransformer:
 
 - Numeric → impute (median) + StandardScaler
-
 - Binary numeric → impute (most_frequent), no scaling
-
 - Categorical → impute (most_frequent) + OneHotEncoder(handle_unknown="ignore")
 
-## 🆚 Models compared:
+## 🆚5. Models compared:
 
 - Logistic Regression
-
 - Random Forest
-
 - CatBoost (best)
-
 - MLP (Neural Net)
 
 Threshold tuning on validation set (optimize F1 for >50K), then final evaluation on test.
 
-## 📊 Results
+
+## 📊6. Results
 
 Model comparison
 
@@ -75,16 +62,13 @@ Model comparison
 Chosen best model: CatBoost
 
 - Accuracy: 0.873
-
 - Precision (>50K): 0.732
-
 - Recall (>50K): 0.745
-
 - F1 (>50K): 0.738
-
 - ROC-AUC: 0.932, PR-AUC: 0.834
 
-## 🔍 Interpretability
+  
+## 🔍7. Interpretability
 
 - Permutation Importance (aggregated to original features):
 Top drivers included education-num, hours-per-week, age, capital-gain / loss, and marital status simplification.
@@ -92,13 +76,15 @@ Top drivers included education-num, hours-per-week, age, capital-gain / loss, an
 - SHAP (CatBoost):
 Confirmed education-num, hours-per-week, and age as strong contributors; positive capital-gain pushes probability upward.
 
-## 💡 Practical insights
+
+## 💡8. Practical insights
 
 - Policies that encourage skills/education and professional roles align with higher earning potential.
 
 - Longer work hours correlate with >50K, but this should be balanced with well-being.
 
 - High capital-gain events are strong signals; risk-based rules might flag such records for manual review in a decision workflow.
+
 
 ## 🧪 Error Analysis (CatBoost)
 
@@ -107,7 +93,7 @@ Confirmed education-num, hours-per-week, and age as strong contributors; positiv
 - False Negatives: younger workers, service/moving roles, or low capital-gain, predicted <=50K though actual >50K.
 Action: targeted thresholding or cost-sensitive adjustment depending on downstream use (e.g., minimize FN if missing high-income customers is costly).
 
-## 🚀 Running the API (Docker)
+## 🚀9. Running the API (Docker)
 
 Packaging & Project Layout:
 
@@ -122,8 +108,22 @@ Packaging & Project Layout:
     - requirements.txt —Python libraries for reproducible builds. 
     - Dockerfile — container recipe to build a self-contained image.
 
- 🔴 Note: The trained model file model.joblib is not included in this repository due to its large file size.
+> 🔴 Note: The trained model file model.joblib is not included in this repository due to its large file size.
+
+
+- Build (first time or when code/requirements change):
+
+      - docker build -t adult-income:1.0 ./service
+
+- Run (detached, reusable):
+
+      -  docker run -d --name adult-income -p 8080:8080 adult-income:1.0
+- Start/End later:
+
+      -  docker stop adult-income
+      -  docker start adult-income
 
 - Versioning: Git tags for releases (e.g., v1.0.0)
+
 
 🎓 Acadamice context: This repository documents one of the applied projects completed for the Machine Learning module in my MSc in Data Science programme (Octorber 2025). All results, code, and design choices are provided for educational purposes; actual performance may vary across environments and dataset revisions.
